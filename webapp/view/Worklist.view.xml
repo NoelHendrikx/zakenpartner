@@ -1,0 +1,71 @@
+<mvc:View controllerName="nl.peppieportals.overzichttijdgegevens.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}"/>
+		</semantic:titleHeading>
+		<semantic:content>
+
+			<Table id="table" width="auto" items="{ path: 'helper>/store/timedata' }" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished">
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
+						<ToolbarSpacer/>
+		
+						<HBox class="sapUiSmallMargin" binding="{helper>/filter/intern}">
+							<RadioButton groupName="GroupA" text="Interne" selected="true" select="onSelectRadio"/>
+							<RadioButton groupName="GroupA" text="Externe" select="onSelectRadio"/>
+						</HBox>
+						<Label text="Jaar"/>
+						<Select id="searchYear" selectedKey="{helper>/filter/jaar}" items="{ path : 'helper>/valuehelp/year' }" change="onSearch">
+							<core:Item key="{helper>key}" text="{helper>key}"/>
+						</Select>
+						<Label text="Tot en met"/>
+						<DatePicker displayFormat="dd-MM-yyyy" width="8rem" value="{helper>/filter/totenmet}"
+							change="onSearch"
+							placeholder="tot en met" id="searchTo"/>
+					
+						<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search="onSearch" width="auto"></SearchField>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column><Text text="{i18n>naam}"/></Column>
+					<Column>
+						<Text text="{i18n>zoeknaam}"/></Column>
+					<Column><Text text="{i18n>roepnaam}"/></Column>
+					<Column visible="{helper>/filter/intern}"><Text text="{i18n>actvarsaldo}"/></Column>
+					<Column visible="{helper>/filter/intern}"><Text text="{i18n>indicator}"/></Column>
+					<Column visible="{helper>/filter/intern}"><Text text="{i18n>grenswaarde}"/></Column>
+					<Column><Text text="{i18n>contracturen}"/></Column>
+					<Column visible="{helper>/filter/intern}"><Text text="{i18n>planuren}"/></Column>
+					<Column><Text text="{i18n>klokuren}"/></Column>
+					<Column><Text text="{i18n>schrijfuren}"/></Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Navigation" press="onPress">
+						<cells>
+							<ObjectIdentifier title="{helper>naam}"/>
+							<ObjectAttribute text="{helper>zoeknaam}"/>
+							<ObjectAttribute text="{helper>roepnaam}"/>
+							<ObjectAttribute text="{helper>actvarsaldo}" visible="{helper>/filter/intern}"/>
+							<ObjectAttribute text="{helper>indicatie}"  visible="{helper>/filter/intern}"/>
+							<ObjectAttribute text="{helper>grenswaardevariabelsaldo}"  visible="{helper>/filter/intern}"/>
+							<ObjectNumber number="{helper>contracturen}" unit="uur"/>
+							<ObjectNumber number="{helper>planuren}" unit="uur" visible="{helper>/filter/intern}"/>
+							<ObjectNumber number="{helper>klokuren}" unit="uur"/>
+							<ObjectNumber number="{helper>schrijfuren}"
+								unit="uur"
+								state="{
+									parts: [
+										{path: 'helper>schrijfuren'},
+										{path: 'helper>contracturen'}
+									],
+									formatter: '.formatter.formatHours'
+								}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+	</semantic:SemanticPage>
+</mvc:View>

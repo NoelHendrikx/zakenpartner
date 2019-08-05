@@ -1,0 +1,199 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZPNB_HR_GEN_SRV" xml:lang="nl" sap:schema-version="1">
+			<EntityType Name="PlannedHours" sap:content-version="1">
+				<Key><PropertyRef Name="Begda"/><PropertyRef Name="Pernr"/><PropertyRef Name="Endda"/></Key><Property Name="Begda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Begindatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Endda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Einddatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PlanHours" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:unicode="false" sap:label="Uren"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Editable" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Wijzigbaar?" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="CATSHours" sap:content-version="1">
+				<Key><PropertyRef Name="Begda"/><PropertyRef Name="Pernr"/><PropertyRef Name="Counter"/><PropertyRef Name="Endda"/></Key><Property Name="AbsAttTxt" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Oms.aan/afw.srt"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Begda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Begindatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Counter" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Teller" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Endda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Einddatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="AbsAttType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Aan-/afw.soort"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="WbsPosid" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="WBS-element"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="WbsDescr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Omschrijving"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CatsHours" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:unicode="false" sap:label="Uren"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Editable" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Wijzigbaar?" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="CATSTemplate" sap:content-version="1">
+				<Key><PropertyRef Name="Begda"/><PropertyRef Name="Line"/><PropertyRef Name="Pernr"/><PropertyRef Name="Endda"/></Key><Property Name="Begda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Begindatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Line" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Regel" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Endda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Einddatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="WbsElement" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="WBS-element"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="AbsAttType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Aan-/afw.soort"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Omschrijving"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Atext" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Oms.aan/afw.srt"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="CATSMessage" sap:content-version="1">
+				<Key><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Key><Property Name="Msgtype" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Type" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Begda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Begindatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Msgtext" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Meldingstekst"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Endda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Einddatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="WBSElement" sap:content-version="1">
+				<Key><PropertyRef Name="Pspnr"/></Key><Property Name="Pspnr" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="WBS-element" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Posid" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="WBS-element" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Post1" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Omschrijving" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Poski" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="Korte ID" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Postu" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Omschrijving" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Employee" sap:content-version="1">
+				<Key><PropertyRef Name="Pernr"/></Key><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Userid" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Gebruiker" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Naam WN/soll." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Positionid" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Form.plaats"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Nameofposition" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Omschrijving"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Controllingarea" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="CO-gebied"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Costcenter" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Kostenplaats"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Nameofcostcenter" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Omschrijving"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="AbsAttType" sap:content-version="1">
+				<Key><PropertyRef Name="Awart"/></Key><Property Name="Awart" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Aan-/afw.soort" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Atext" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Oms.aan/afw.srt"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="EmployeePeriod" sap:content-version="1">
+				<Key><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Key><Property Name="Editable" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Wijzigbaar?" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Begda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Begindatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Endda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Einddatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><NavigationProperty Name="NavWTRDetails" Relationship="ZPNB_HR_GEN_SRV.EmpWTRDetails" FromRole="FromRole_EmpWTRDetails"
+					ToRole="ToRole_EmpWTRDetails"/><NavigationProperty Name="NavClockTimes" Relationship="ZPNB_HR_GEN_SRV.EmpClockTimes" FromRole="FromRole_EmpClockTimes"
+					ToRole="ToRole_EmpClockTimes"/><NavigationProperty Name="NavPlannedHours" Relationship="ZPNB_HR_GEN_SRV.EmpPlannedHours" FromRole="FromRole_EmpPlannedHours"
+					ToRole="ToRole_EmpPlannedHours"/><NavigationProperty Name="NavLeaveQuota" Relationship="ZPNB_HR_GEN_SRV.EmpLeaveQuota" FromRole="FromRole_EmpLeaveQuota"
+					ToRole="ToRole_EmpLeaveQuota"/><NavigationProperty Name="NavCATSHours" Relationship="ZPNB_HR_GEN_SRV.EmpCATSHours" FromRole="FromRole_EmpCATSHours"
+					ToRole="ToRole_EmpCATSHours"/><NavigationProperty Name="NavCATSTemplate" Relationship="ZPNB_HR_GEN_SRV.EmpCATSTemplate" FromRole="FromRole_EmpCATSTemplate"
+					ToRole="ToRole_EmpCATSTemplate"/><NavigationProperty Name="NavCATSMessage" Relationship="ZPNB_HR_GEN_SRV.EmpCATSMessage" FromRole="FromRole_EmpCATSMessage"
+					ToRole="ToRole_EmpCATSMessage"/></EntityType>
+			<EntityType Name="ClockTimes" sap:content-version="1">
+				<Key><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Key><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Begda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Begindatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Endda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Einddatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ClockIn" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Begintijd" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ClockOut" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Eindtijd" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="BreakIn" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Begintijd" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="BreakOut" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Eindtijd" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="GrossHours" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:unicode="false" sap:label="Uren"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="BreakHours" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:unicode="false" sap:label="Uren"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="NetHours" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:unicode="false" sap:label="Uren"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="RecordedHours" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:unicode="false" sap:label="Uren"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Editable" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Wijzigbaar?" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="LeaveQuota" sap:content-version="1">
+				<Key><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Key><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Begda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Begindatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Endda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Einddatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ContingentType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Afw.cont.type"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ContingentOmschr" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Oms. contingent"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ContingentToeken" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="1" sap:unicode="false"
+					sap:label="Aantal conting." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ContingentAfboek" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="1" sap:unicode="false"
+					sap:label="Aantal conting." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ContingentSaldo" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="1" sap:unicode="false"
+					sap:label="Aantal conting." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="WTRDetails" sap:content-version="1">
+				<Key><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Key><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Begda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Begindatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Endda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Einddatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Tijdres" Type="Edm.Decimal" Nullable="false" Precision="8" Scale="1" sap:unicode="false" sap:label="tijd"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="TijdcorOvw" Type="Edm.Decimal" Nullable="false" Precision="8" Scale="1" sap:unicode="false" sap:label="tijd"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="TijdcorZiek" Type="Edm.Decimal" Nullable="false" Precision="8" Scale="1" sap:unicode="false" sap:label="tijd"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="TijdcorOverig" Type="Edm.Decimal" Nullable="false" Precision="8" Scale="1" sap:unicode="false" sap:label="tijd"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Tijdsaldo" Type="Edm.Decimal" Nullable="false" Precision="8" Scale="1" sap:unicode="false" sap:label="tijd"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="EmployeeTimesheetURL" sap:content-version="1">
+				<Key><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Key><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Begda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Begindatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Endda" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Einddatum" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="UrlTotal" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="URL - Totale uren over periode (PDF)"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="UrlDetails" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="URL - Specificatie over periode (PDF)"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="EmployeeByName" sap:content-version="1">
+				<Key><PropertyRef Name="Nachn"/><PropertyRef Name="Nach2"/><PropertyRef Name="Vorna"/></Key><Property Name="Rufnm" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Roepnaam" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personeelsnr." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Inits" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Voorletters" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Nachn" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Achternaam" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Name2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="2e naam" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Nach2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="2e naam" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Vorna" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Voornaam" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Cname" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Volledige naam"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<Association Name="EmpPlannedHours" sap:content-version="1"><End Type="ZPNB_HR_GEN_SRV.EmployeePeriod" Multiplicity="1" Role="FromRole_EmpPlannedHours"/><End Type="ZPNB_HR_GEN_SRV.PlannedHours" Multiplicity="*" Role="ToRole_EmpPlannedHours"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_EmpPlannedHours"><PropertyRef Name="Endda"/><PropertyRef Name="Begda"/><PropertyRef Name="Pernr"/></Principal>
+					<Dependent Role="ToRole_EmpPlannedHours"><PropertyRef Name="Endda"/><PropertyRef Name="Begda"/><PropertyRef Name="Pernr"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="EmpCATSHours" sap:content-version="1"><End Type="ZPNB_HR_GEN_SRV.EmployeePeriod" Multiplicity="1" Role="FromRole_EmpCATSHours"/><End Type="ZPNB_HR_GEN_SRV.CATSHours" Multiplicity="*" Role="ToRole_EmpCATSHours"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_EmpCATSHours"><PropertyRef Name="Endda"/><PropertyRef Name="Begda"/><PropertyRef Name="Pernr"/></Principal>
+					<Dependent Role="ToRole_EmpCATSHours"><PropertyRef Name="Endda"/><PropertyRef Name="Begda"/><PropertyRef Name="Pernr"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="EmpCATSTemplate" sap:content-version="1"><End Type="ZPNB_HR_GEN_SRV.EmployeePeriod" Multiplicity="1" Role="FromRole_EmpCATSTemplate"/><End Type="ZPNB_HR_GEN_SRV.CATSTemplate" Multiplicity="*" Role="ToRole_EmpCATSTemplate"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_EmpCATSTemplate"><PropertyRef Name="Endda"/><PropertyRef Name="Begda"/><PropertyRef Name="Pernr"/></Principal>
+					<Dependent Role="ToRole_EmpCATSTemplate"><PropertyRef Name="Endda"/><PropertyRef Name="Begda"/><PropertyRef Name="Pernr"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="EmpCATSMessage" sap:content-version="1"><End Type="ZPNB_HR_GEN_SRV.EmployeePeriod" Multiplicity="1" Role="FromRole_EmpCATSMessage"/><End Type="ZPNB_HR_GEN_SRV.CATSMessage" Multiplicity="*" Role="ToRole_EmpCATSMessage"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_EmpCATSMessage"><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Principal>
+					<Dependent Role="ToRole_EmpCATSMessage"><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="EmpLeaveQuota" sap:content-version="1"><End Type="ZPNB_HR_GEN_SRV.EmployeePeriod" Multiplicity="1" Role="FromRole_EmpLeaveQuota"/><End Type="ZPNB_HR_GEN_SRV.LeaveQuota" Multiplicity="*" Role="ToRole_EmpLeaveQuota"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_EmpLeaveQuota"><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Principal>
+					<Dependent Role="ToRole_EmpLeaveQuota"><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="EmpWTRDetails" sap:content-version="1"><End Type="ZPNB_HR_GEN_SRV.EmployeePeriod" Multiplicity="1" Role="FromRole_EmpWTRDetails"/><End Type="ZPNB_HR_GEN_SRV.WTRDetails" Multiplicity="*" Role="ToRole_EmpWTRDetails"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_EmpWTRDetails"><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Principal>
+					<Dependent Role="ToRole_EmpWTRDetails"><PropertyRef Name="Pernr"/><PropertyRef Name="Begda"/><PropertyRef Name="Endda"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="EmpClockTimes" sap:content-version="1"><End Type="ZPNB_HR_GEN_SRV.EmployeePeriod" Multiplicity="1" Role="FromRole_EmpClockTimes"/><End Type="ZPNB_HR_GEN_SRV.ClockTimes" Multiplicity="*" Role="ToRole_EmpClockTimes"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_EmpClockTimes"><PropertyRef Name="Endda"/><PropertyRef Name="Begda"/><PropertyRef Name="Pernr"/></Principal>
+					<Dependent Role="ToRole_EmpClockTimes"><PropertyRef Name="Endda"/><PropertyRef Name="Begda"/><PropertyRef Name="Pernr"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZPNB_HR_GEN_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="PlannedHoursSet" EntityType="ZPNB_HR_GEN_SRV.PlannedHours" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="CATSHoursSet" EntityType="ZPNB_HR_GEN_SRV.CATSHours" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="CATSTemplateSet" EntityType="ZPNB_HR_GEN_SRV.CATSTemplate" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="CATSMessageSet" EntityType="ZPNB_HR_GEN_SRV.CATSMessage" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="WBSElementSet" EntityType="ZPNB_HR_GEN_SRV.WBSElement" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="Employees" EntityType="ZPNB_HR_GEN_SRV.Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="AbsAttTypeSet" EntityType="ZPNB_HR_GEN_SRV.AbsAttType" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="EmployeePeriodSet" EntityType="ZPNB_HR_GEN_SRV.EmployeePeriod" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="ClockTimesSet" EntityType="ZPNB_HR_GEN_SRV.ClockTimes" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="LeaveQuotaSet" EntityType="ZPNB_HR_GEN_SRV.LeaveQuota" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="WTRDetailsSet" EntityType="ZPNB_HR_GEN_SRV.WTRDetails" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="EmployeeTimesheetURLSet" EntityType="ZPNB_HR_GEN_SRV.EmployeeTimesheetURL" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="EmployeeByNameSet" EntityType="ZPNB_HR_GEN_SRV.EmployeeByName" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+				<AssociationSet Name="EmpLeaveQuotaSet" Association="ZPNB_HR_GEN_SRV.EmpLeaveQuota" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="EmployeePeriodSet" Role="FromRole_EmpLeaveQuota"/><End EntitySet="LeaveQuotaSet" Role="ToRole_EmpLeaveQuota"/></AssociationSet>
+				<AssociationSet Name="EmpPlannedHoursSet" Association="ZPNB_HR_GEN_SRV.EmpPlannedHours" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="EmployeePeriodSet" Role="FromRole_EmpPlannedHours"/><End EntitySet="PlannedHoursSet" Role="ToRole_EmpPlannedHours"/></AssociationSet>
+				<AssociationSet Name="EmpClockTimesSet" Association="ZPNB_HR_GEN_SRV.EmpClockTimes" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="EmployeePeriodSet" Role="FromRole_EmpClockTimes"/><End EntitySet="ClockTimesSet" Role="ToRole_EmpClockTimes"/></AssociationSet>
+				<AssociationSet Name="EmpWTRDetailsSet" Association="ZPNB_HR_GEN_SRV.EmpWTRDetails" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="EmployeePeriodSet" Role="FromRole_EmpWTRDetails"/><End EntitySet="WTRDetailsSet" Role="ToRole_EmpWTRDetails"/></AssociationSet>
+				<AssociationSet Name="EmpCATSHoursSet" Association="ZPNB_HR_GEN_SRV.EmpCATSHours" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="EmployeePeriodSet" Role="FromRole_EmpCATSHours"/><End EntitySet="CATSHoursSet" Role="ToRole_EmpCATSHours"/></AssociationSet>
+				<AssociationSet Name="EmpCATSTemplateSet" Association="ZPNB_HR_GEN_SRV.EmpCATSTemplate" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="EmployeePeriodSet" Role="FromRole_EmpCATSTemplate"/><End EntitySet="CATSTemplateSet" Role="ToRole_EmpCATSTemplate"/></AssociationSet>
+				<AssociationSet Name="EmpCATSMessageSet" Association="ZPNB_HR_GEN_SRV.EmpCATSMessage" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="EmployeePeriodSet" Role="FromRole_EmpCATSMessage"/><End EntitySet="CATSMessageSet" Role="ToRole_EmpCATSMessage"/></AssociationSet>
+			</EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="https://pnbfso001:44300/sap/opu/odata/sap/ZPNB_HR_GEN_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version"
+				href="https://pnbfso001:44300/sap/opu/odata/sap/ZPNB_HR_GEN_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
