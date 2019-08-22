@@ -16,10 +16,13 @@
 						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
 						<ToolbarSpacer/>
 		
-						<HBox class="sapUiSmallMargin" binding="{helper>/filter/intern}">
-							<RadioButton groupName="GroupA" text="Intern" selected="true" select="onSelectRadio"/>
-							<RadioButton groupName="GroupA" text="Extern" select="onSelectRadio"/>
-						</HBox>
+						<RadioButtonGroup id="rbIntern" select="onSelectRadio" columns="2">
+							<buttons>
+								<RadioButton groupName="GroupA" text="Intern" selected="true"/>
+								<RadioButton groupName="GroupA" text="Extern" />
+							</buttons>
+						</RadioButtonGroup>
+
 						<Label text="01-01 t/m"/>
 						<DatePicker displayFormat="dd-MM-yyyy"  width="8rem" value="{helper>/filter/totenmet}"
 							change="onFilterGetData"

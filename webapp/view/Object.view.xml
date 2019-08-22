@@ -50,7 +50,7 @@
 							<Text text="{ path : 'helper>Datum', 
 								type: 'sap.ui.model.odata.type.DateTime',
 									formatOptions : {
-										UTC : false,
+										UTC : true,
 										pattern: 'dd-MM-yyyy'
 									}
 							}"/>

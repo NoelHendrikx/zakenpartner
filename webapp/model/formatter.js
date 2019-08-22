@@ -109,6 +109,13 @@ sap.ui.define([], function() {
         var sNewDate = oDateFormat.format(dateUI);
       }
       return typeof sDate === "String" ? sNewDate : sDate;
+    },
+
+    formatDateGMT : function(oDate){
+      
+      oDate.setHours(12);
+console.log(oDate);
+      return oDate;
     }
   };
 });

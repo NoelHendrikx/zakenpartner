@@ -42,7 +42,8 @@ sap.ui.define(
 								Begda: null,
 								Endda: null
 							}
-						}
+						},
+						userdata : {}
 					},
 					filter: {
 						jaar: new Date().getFullYear(),

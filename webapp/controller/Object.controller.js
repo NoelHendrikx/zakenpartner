@@ -99,8 +99,19 @@ sap.ui.define(
           var sPernr = oArgs.objectId;
           var oBegda = this._toDate(oArgs.begda);
           var oEndda = this._toDate(oArgs.endda);
+          var oCurrent = oModel.getProperty("/store/timedetails/current");
           
-          console.log('dates via url', oArgs);
+          if(!oCurrent.Begda){
+            // probably a reload of page
+            oCurrent.Begda = oBegda;
+            oCurrent.Endda = oEndda;
+            oCurrent.Pernr = sPernr;
+
+            models.getEmployeeDetailData().then(function(oData) {
+               oModel.setProperty("/store/userdata", oData);
+            });
+          }
+
 
           oModel.setProperty("/store/timedetails/results", []);
           this.getModel()
@@ -169,7 +180,7 @@ sap.ui.define(
           dateUI.setMonth(sMM); //for months with less than 30 days have to recall this method
           dateUI.setDate(sDD);
           dateUI.setFullYear(sYYYY);
-          dateUI.setHours(0);
+          dateUI.setHours(12);    // set to 12 hours to avoid timezone issues (not required right now)
           dateUI.setMinutes(0);
           dateUI.setSeconds(0);
           var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
