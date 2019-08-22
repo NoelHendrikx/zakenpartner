@@ -58,7 +58,7 @@
 				"sap.collaboration": {
 					"lazy": true
 				},
-				"sap.ui.unified" : {}
+				"sap.ui.unified": {}
 			}
 		},
 		"contentDensities": {

@@ -97,12 +97,11 @@ sap.ui.define(
 
           var oModel = this.getModel("helper");
           var sPernr = oArgs.objectId;
-          var oBegda = this._toDate(oArgs.endda);
-          oBegda.setDate(1);
-          oBegda.setMonth(0);
-          
+          var oBegda = this._toDate(oArgs.begda);
           var oEndda = this._toDate(oArgs.endda);
-console.log('begda', oBegda);
+          
+          console.log('dates via url', oArgs);
+
           oModel.setProperty("/store/timedetails/results", []);
           this.getModel()
             .metadataLoaded()
@@ -160,9 +159,9 @@ console.log('begda', oBegda);
         },
 
         _toDate: function(sDate) {
-          let sDD = sDate.substr(0, 2);
-          let sMM = parseInt(sDate.substr(3, 2)) - 1;
-          let sYYYY = sDate.substr(6, 4);
+          var sDD = sDate.substr(0, 2);
+          var sMM = parseInt(sDate.substr(3, 2)) - 1;
+          var sYYYY = sDate.substr(6, 4);
 
           var dateUI = new Date();
           dateUI.setMonth(sMM);
@@ -177,6 +176,7 @@ console.log('begda', oBegda);
             pattern: 'dd-MM-YYYY'
           });
           var sNewDate = oDateFormat.format(dateUI);
+          
           return dateUI;
         },
 

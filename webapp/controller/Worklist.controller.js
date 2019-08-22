@@ -89,23 +89,8 @@ sap.ui.define(
 
         onAfterRendering: function() {
           var oModel = this.getView().getModel("helper");
-          var oTable = this.byId("table");
-          var that = this;
 
-          // models
-          // 	.getEmployeeDetailData()
-          // 	.then(function(oData) {
-          // 		console.log('Employee Data', oData);
-          // 		oModel.setProperty('/store/userdata', oData);
-          // 		return models.getTimeData(that._getFilterOptions(oModel));
-          // 	})
-          // 	.then(function(oTimeData) {
-          // 		console.log('oTimeData', oTimeData);
-          // 		oModel.setProperty('/store/timedata', oTimeData);
-          // 		oModel.setProperty('/ui/busy', false);
-          // 	});
           models.getEmployeeDetailData().then(function(oData) {
-            console.log("Employee Data", oData);
             oModel.setProperty("/store/userdata", oData);
             oModel.setProperty("/ui/busy", false);
           });
@@ -277,8 +262,8 @@ sap.ui.define(
          */
         _showObject: function(oItem) {
           var oObj = oItem.getBindingContext("helper").getObject();
-          var sBegda = oObj.Begda.toLocaleDateString().replace(/\//g, ".");
-          var sEndda = oObj.Endda.toLocaleDateString().replace(/\//g, ".");
+		var sBegda = ('0' + oObj.Begda.getDate()).slice(-2) + '.' + ('0' + (oObj.Begda.getMonth()+1)).slice(-2) + '.' + oObj.Begda.getFullYear();
+		var sEndda = ('0' + oObj.Endda.getDate()).slice(-2) + '.' + ('0' + (oObj.Endda.getMonth()+1)).slice(-2) + '.' + oObj.Endda.getFullYear();
 
           this.getModel("helper").setProperty("/store/timedetails/current", {
             Pernr: oObj.Pernr,
