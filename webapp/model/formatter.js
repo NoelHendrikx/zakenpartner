@@ -87,7 +87,7 @@ sap.ui.define([], function() {
 
     // format date in current locale setting
     formatDateString: function(sDate) {
-      var sFormat = 'dd-MM-yyyy';
+      var sFormat = "dd-MM-yyyy";
 
       if (typeof sDate === "String") {
         var sYYYY = sDate.substr(6, 4);
@@ -111,11 +111,17 @@ sap.ui.define([], function() {
       return typeof sDate === "String" ? sNewDate : sDate;
     },
 
-    formatDateGMT : function(oDate){
-      
+    formatDateGMT: function(oDate) {
       oDate.setHours(12);
-console.log(oDate);
       return oDate;
+    },
+
+    formatZiekteUren : function(oZiekte){
+      return parseFloat(oZiekte) > 0 ?  'ZIEK' : '';
+    },
+
+    formatVariabelSaldoDecimals : function(oSaldo){
+      return parseFloat(oSaldo).toFixed(1);
     }
   };
 });

@@ -187,7 +187,6 @@ sap.ui.define(
         var oIntern = this.getView().byId("rbIntern");
         var oModel = this.getModel("helper");
 
-        console.log(oIntern);
         if (!oModel.getProperty("/ui/busy")) {
           oModel.setProperty("/ui/busy", true);
           oModel.setProperty("/store/timedata", null);
@@ -208,7 +207,6 @@ sap.ui.define(
         var bIntern = oModel.getProperty("/filter/intern");
         var sUserId = oModel.getProperty("/store/userdata/Userid");
 
-        console.log('intern', bIntern);
         var aFilters = [
           new Filter({
             filters: [

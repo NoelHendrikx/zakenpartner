@@ -1,11 +1,10 @@
 <mvc:View controllerName="nl.peppieportals.overzichttijdgegevens.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core">
-	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="{/store/features/IsHrAdmin}">
 		<semantic:titleHeading>
 			<Title text="{i18n>worklistTitle}"/>
 		</semantic:titleHeading>
 		<semantic:content>
-
 			<Table id="table" width="auto" items="{ path: 'helper>/store/timedata/results',
 			sorter : {
               path : 'Nachn' 
@@ -32,7 +31,6 @@
 					</Toolbar>
 				</headerToolbar>
 				<columns>
-
 					<Column>
 						<Text text="{i18n>nachn}" tooltip="{i18n>tt_nachn}"/></Column>
 					<Column><Text text="{i18n>rufn}" tooltip="{i18n>tt_rufn}"/></Column>
@@ -53,7 +51,7 @@
 							<ObjectAttribute text="{helper>Nachn}"/>
 							<ObjectAttribute text="{helper>Rufnm}"/>
 							<ObjectAttribute text="{helper>Ename}"/>
-							<ObjectAttribute text="{helper>VariabelSaldo}" visible="{helper>/filter/intern}"/>
+							<ObjectAttribute text="{path : 'helper>VariabelSaldo', formatter: '.formatter.formatVariabelSaldoDecimals'}" visible="{helper>/filter/intern}"/>
 							<core:Icon tooltip="" src="{parts : 
 								[ { path : 'helper>VariabelSaldo' },
 								  { path : 'helper>ContractUren' }

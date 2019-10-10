@@ -60,7 +60,7 @@
 							<ObjectNumber number="{helper>PlanUren}" unit="uur"/>
 							<ObjectNumber number="{helper>KlokUren}" unit="uur"/>
 							<ObjectNumber number="{helper>SchrijfUren}" unit="uur"/>
-							<ObjectNumber number="{helper>ZiekteUren}" unit="uur"/>
+							<ObjectAttribute text="{path : 'helper>ZiekteUren', formatter : '.formatter.formatZiekteUren'}" />
 							
 						</cells>
 					</ColumnListItem>
