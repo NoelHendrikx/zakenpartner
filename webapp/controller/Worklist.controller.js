@@ -173,6 +173,25 @@ sap.ui.define(
         }
       },
 
+
+      onChangeFilterOrgUnit: function(oEvent) {
+	      var aFilters = [];
+	      var sQuery = oEvent.getSource().getSelectedKey();
+
+	      if (sQuery && sQuery.length > 0) {
+	        aFilters = [
+	          new Filter({
+	            filters: [
+	              new Filter("OrgShort", FilterOperator.EQ, sQuery)
+	            ],
+	            and: false
+	          })
+	        ];
+	      }
+	      this._applySearch(aFilters);
+     },
+
+
       /**
        * Event handler for refresh event. Keeps filter, sort
        * and group settings and refreshes the list binding.
@@ -192,10 +211,24 @@ sap.ui.define(
           oModel.setProperty("/store/timedata", null);
           models.getTimeData(this._getFilterOptions(oModel)).then(function(oData) {
             oModel.setProperty("/store/timedata", oData);
+            this.updateOrgUnit(oModel, oData);
             oModel.setProperty("/ui/busy", false);
-          });
+          }.bind(this));
         }
       },
+
+	 updateOrgUnit : function(oModel, oData){
+	 	var aOrgUnits = [];
+	 	var aPushedOrgUnits = [];
+	 	oData.results.forEach(function(oItm){
+	 		aOrgUnits[oItm.OrgShort] = oItm.OrgStext;
+	 	});
+	 	for (var prop in aOrgUnits){
+	 		aPushedOrgUnits.push( { OrgShort : prop, OrgStext : aOrgUnits[prop] });
+	 	}
+	 	oModel.setProperty('/valuehelp/orgunits', aPushedOrgUnits);
+		oModel.setProperty('/ui/showOrgUnitColumn', aPushedOrgUnits.length > 1);
+	 },
 
       _getFilterOptions: function(oModel) {
         var aFilters = [];
@@ -274,6 +307,7 @@ sap.ui.define(
           oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
         }
       }
+      
     });
   }
 );

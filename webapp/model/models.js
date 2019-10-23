@@ -43,7 +43,7 @@ sap.ui.define(
 								Endda: null
 							}
 						},
-						userdata : {}
+						userdata: {}
 					},
 					filter: {
 						jaar: new Date().getFullYear(),
@@ -52,7 +52,11 @@ sap.ui.define(
 						intern: true
 					},
 					ui: {
-						busy: true
+						busy: true,
+						showOrgUnitColumn: false
+					},
+					valuehelp: {
+						orgunits: null
 					}
 				});
 				return oModel;
