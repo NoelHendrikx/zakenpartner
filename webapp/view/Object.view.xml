@@ -5,17 +5,14 @@
 	xmlns:semantic="sap.f.semantic"
 	xmlns:footerbar="sap.ushell.ui.footerbar">
 
-	<semantic:SemanticPage
-		id="page"
+	<semantic:SemanticPage id="page"
 		headerPinnable="false"
-		toggleHeaderOnTitleClick="false"
 		busy="{/ui/busy}"
 		busyIndicatorDelay="0">
 
 		<semantic:titleHeading>
 			<Title text="Details van {helper>/store/timedetails/current/Ename} ({helper>/store/timedetails/current/Pernr})" />
 		</semantic:titleHeading>
-
 		<semantic:headerContent>
 			<Text text="Periode : { path : 'helper>/store/timedetails/current/Begda', 
 				type: 'sap.ui.model.odata.type.DateTime',
@@ -32,8 +29,8 @@
 			}" />
 		</semantic:headerContent>
 		<semantic:content>
-
-			<Table id="table2" width="auto" items="{ path: 'helper>/store/timedetails/results' }" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished">
+			<Table id="table2" width="auto" items="{ path: 'helper>/store/timedetails/results' }"
+				 growing="true" growingScrollToLoad="true" growingThreshold="50">
 				<columns>
 					<Column><Text text="{i18n>datum}"/></Column>
 					<Column>

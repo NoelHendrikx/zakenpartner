@@ -114,6 +114,7 @@ sap.ui.define(
 
 
           oModel.setProperty("/store/timedetails/results", []);
+
           this.getModel()
             .metadataLoaded()
             .then(
@@ -129,6 +130,7 @@ sap.ui.define(
                   })
                 ];
                 models.getEmpTimeDataSet(aFilters).then(function(oData) {
+                  console.log(oData.results);
                   oModel.setProperty(
                     "/store/timedetails/results",
                     oData.results
