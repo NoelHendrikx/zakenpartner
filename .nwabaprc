@@ -3,10 +3,10 @@
     "conn_server": "https://pnbfso001.brabant-lan.local:44300",
     "conn_usestrictssl" : false,
     "conn_user": "nhend",
-    "conn_password": "Clippr44..&&",
+    "conn_password": "Clippr44..**",
     "abap_package": "ZFIORI",
     "abap_bsp": "ZO_TIJDGEGEVENS",
     "abap_bsp_text": "Overzicht tijdgegevens",
-    "abap_transport": "FSOK900385",
+    "abap_transport": "FSOK900391",
     "calcappindex" : true
 }

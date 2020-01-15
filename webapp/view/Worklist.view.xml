@@ -9,7 +9,7 @@
 				sorter : {
 	              path : 'Nachn' 
 	           }
-			 }" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished" class="sapUiNoMargin" busy="{helper>/ui/busy}" busyIndicatorDelay="0" 
+			 }" growing="true" growingScrollToLoad="true" growingThreshold="50" updateFinished="onUpdateFinished" class="sapUiNoMargin" busy="{helper>/ui/busy}" busyIndicatorDelay="0" 
 				 noDataText="{i18n>nodata}">
 				<headerToolbar>
 					<Toolbar>
