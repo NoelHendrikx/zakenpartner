@@ -1,7 +1,7 @@
 {
 	"_version": "1.9.0",
 	"sap.app": {
-		"id": "nl.peppieportals.overzichttijdgegevens",
+		"id": "nl.peppieportals.zakenpartner",
 		"type": "application",
 		"i18n": "i18n/i18n.properties",
 		"title": "{{appTitle}}",
@@ -11,7 +11,7 @@
 		},
 		"dataSources": {
 			"mainService": {
-				"uri": "/sap/opu/odata/sap/ZPNB_HR_GEN_SRV/",
+				"uri": "/sap/opu/odata/sap/ZPNB_ZAKENPARTNER_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -43,7 +43,7 @@
 	},
 	"sap.ui5": {
 		"rootView": {
-			"viewName": "nl.peppieportals.overzichttijdgegevens.view.App",
+			"viewName": "nl.peppieportals.zakenpartner.view.App",
 			"type": "XML",
 			"async": true,
 			"id": "app"
@@ -69,12 +69,16 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "nl.peppieportals.overzichttijdgegevens.i18n.i18n"
+					"bundleName": "nl.peppieportals.zakenpartner.i18n.i18n"
 				}
 			},
 			"": {
 				"dataSource": "mainService",
-				"preload": true
+				"preload": true,
+				"settings": {
+					"useBatch": false,
+					"defaultCountMode": "Inline"
+				}
 			}
 		},
 		"services": {
@@ -90,7 +94,7 @@
 			"config": {
 				"routerClass": "sap.m.routing.Router",
 				"viewType": "XML",
-				"viewPath": "nl.peppieportals.overzichttijdgegevens.view",
+				"viewPath": "nl.peppieportals.zakenpartner.view",
 				"controlId": "app",
 				"controlAggregation": "pages",
 				"bypassed": {
@@ -107,10 +111,16 @@
 					"target": [
 						"worklist"
 					]
+				},{
+					"pattern": "aanmaken/{objectId}",
+					"name": "aanmaken",
+					"target": [
+						"object"
+					]
 				},
 				{
-					"pattern": "EmployeeDetails/{objectId}/{begda}/{endda}",
-					"name": "object",
+					"pattern": "tonen/{objectId}",
+					"name": "tonen",
 					"target": [
 						"object"
 					]
@@ -120,14 +130,12 @@
 				"worklist": {
 					"viewName": "Worklist",
 					"viewId": "worklist",
-					"viewLevel": 1,
-					"title": "{i18n>worklistViewTitle}"
+					"viewLevel": 1
 				},
 				"object": {
 					"viewName": "Object",
 					"viewId": "object",
-					"viewLevel": 2,
-					"title": "{i18n>objectViewTitle}"
+					"viewLevel": 2
 				},
 				"objectNotFound": {
 					"viewName": "ObjectNotFound",
@@ -141,7 +149,7 @@
 		}
 	},
 	"sap.platform.abap": {
-		"uri": "/sap/bc/ui5_ui5/sap/zo_tijdgegevens/webapp",
+		"uri": "/sap/bc/ui5_ui5/sap/zakenpartner/webapp",
 		"_version": "1.1.0"
 	}
 }

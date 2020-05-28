@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="nl.peppieportals.overzichttijdgegevens.controller.NotFound"
+	controllerName="nl.peppieportals.zakenpartner.controller.NotFound"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
 

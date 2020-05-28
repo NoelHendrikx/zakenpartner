@@ -24,6 +24,14 @@ sap.ui.define([], function() {
       return sState;
     },
 
+    formatDeleteMode : function(bIsEditable){
+      return bIsEditable ? sap.m.ListMode.Delete : sap.m.ListMode.None;
+    },
+
+    formatZakenPartner : function(sZakenpartner){
+      return sZakenpartner === "2" ? "Bedrijf" : "Persoon" ;
+    },
+    
     availableState: function(sStateValue) {
       var sStateValueToLower = sStateValue.toLowerCase();
 

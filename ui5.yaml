@@ -1,6 +1,6 @@
 specVersion: '1.0'
 metadata:
-  name: overzichttijdgegevens
+  name: zakenpartner
 type: application
 builder:
   customTasks:

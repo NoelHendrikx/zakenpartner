@@ -1,70 +1,195 @@
-<mvc:View
-	controllerName="nl.peppieportals.overzichttijdgegevens.controller.Object"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic"
+<mvc:View controllerName="nl.peppieportals.zakenpartner.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:semantic="sap.f.semantic" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
 	xmlns:footerbar="sap.ushell.ui.footerbar">
-
-	<semantic:SemanticPage id="page"
-		headerPinnable="false"
-		busy="{/ui/busy}"
-		busyIndicatorDelay="0">
-
+	<semantic:SemanticPage id="page" headerPinnable="false" busy="{/ui/busy}" busyIndicatorDelay="0" showFooter="true">
 		<semantic:titleHeading>
-			<Title text="Details van {helper>/store/timedetails/current/Ename} ({helper>/store/timedetails/current/Pernr})" />
+			<Title text="Zakenpartner - {path : 'helper>/store/zakenpartner/details/SoortZakenpartner', formatter: '.formatter.formatZakenPartner'} {helper>/store/zakenpartner/details/Partner}"/>
 		</semantic:titleHeading>
-		<semantic:headerContent>
-			<Text text="Periode : { path : 'helper>/store/timedetails/current/Begda', 
-				type: 'sap.ui.model.odata.type.DateTime',
-					formatOptions : {
-						UTC : true,
-						pattern: 'dd-MM-yyyy' 
-					}
-				} tot en met { path : 'helper>/store/timedetails/current/Endda', 
-				type: 'sap.ui.model.odata.type.DateTime',
-					formatOptions : {
-						UTC : true,
-						pattern: 'dd-MM-yyyy' 
-					}
-			}" />
-		</semantic:headerContent>
+		<semantic:headerContent></semantic:headerContent>
 		<semantic:content>
-			<Table id="table2" width="auto" items="{ path: 'helper>/store/timedetails/results' }"
-				 growing="true" growingScrollToLoad="true" growingThreshold="50">
-				<columns>
-					<Column><Text text="{i18n>datum}"/></Column>
-					<Column>
-						<Text text="{i18n>dag}"/></Column>
-					<Column><Text text="{i18n>week}"/></Column>
-					<Column hAlign="Right"><Text text="{i18n>planuren}"/></Column>
-					<Column hAlign="Right"><Text text="{i18n>klokuren}"/></Column>
-					<Column hAlign="Right"><Text text="{i18n>schrijfuren}"/></Column>
-					<Column hAlign="Right"><Text text="{i18n>ziekteuren}"/></Column>
-				</columns>
+			<IconTabBar id="idIconTabBarNoIcons" class="sapUiResponsiveContentPadding">
 				<items>
-					<ColumnListItem >
-						<cells>
-							<Text text="{ path : 'helper>Datum', 
-								type: 'sap.ui.model.odata.type.DateTime',
-									formatOptions : {
-										UTC : true,
-										pattern: 'dd-MM-yyyy'
-									}
-							}"/>
-
-							<ObjectAttribute text="{helper>Dag}"/>
-							<ObjectAttribute text="{helper>Weeknummer}"/>
-							<ObjectNumber number="{helper>PlanUren}" unit="uur"/>
-							<ObjectNumber number="{helper>KlokUren}" unit="uur"/>
-							<ObjectNumber number="{helper>SchrijfUren}" unit="uur"/>
-							<ObjectAttribute text="{path : 'helper>ZiekteUren', formatter : '.formatter.formatZiekteUren'}" />
-							
-						</cells>
-					</ColumnListItem>
+					<IconTabFilter text="Zakenpartner">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+							singleContainerFullSize="false" ariaLabelledBy="Telefoon">
+							<f:content>
+								<Toolbar ariaLabelledBy="Title5">
+									<Title text="Algemeen" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="Naam 1" visible="{helper>/ui/organisatie}"/>
+								<Input value="{helper>/store/zakenpartner/details/Naam1}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
+								<Label text="Naam 2" visible="{helper>/ui/organisatie}"/>
+								<Input value="{helper>/store/zakenpartner/details/Naam2}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
+								<Label text="Initialen" visible="{helper>/ui/persoon}"/>
+								<Input value="{helper>/store/zakenpartner/details/Initialen}" visible="{helper>/ui/persoon}" editable="{helper>/ui/editable}"/>
+								<Label text="Achternaam" visible="{helper>/ui/persoon}"/>
+								<Input value="{helper>/store/zakenpartner/details/Achternaam}" visible="{helper>/ui/persoon}" editable="{helper>/ui/editable}"/>
+								<Label text="Voornaam" visible="{helper>/ui/persoon}"/>
+								<Input value="{helper>/store/zakenpartner/details/Voornaam}" visible="{helper>/ui/persoon}" editable="{helper>/ui/editable}"/>
+								<Toolbar>
+									<Title text="Adres" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="Straat"/>
+								<Input value="{helper>/store/zakenpartner/details/StraatNaam}" required="true" editable="{helper>/ui/editable}"/>
+								<Label text="Huisnummer"/>
+								<Input value="{helper>/store/zakenpartner/details/StraatHuisnr}" required="true" editable="{helper>/ui/editable}"/>
+								<Label text="Toevoeging"/>
+								<Input value="{helper>/store/zakenpartner/details/StraatToevoeging}" editable="{helper>/ui/editable}"/>
+								<Label text="Postcode"/>
+								<Input value="{helper>/store/zakenpartner/details/Postcode}" required="true" editable="{helper>/ui/editable}"/>
+								<Label text="Plaats"/>
+								<Input value="{helper>/store/zakenpartner/details/Plaats}" required="true" editable="{helper>/ui/editable}"/>
+								<Label text="Landcode"/>
+								<Input value="{helper>/store/zakenpartner/details/Landcode}" required="true" editable="{helper>/ui/editable}"/>
+								<Toolbar>
+									<Title text="Postbus" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="Postbus nummer"/>
+								<Input value="{helper>/store/zakenpartner/details/PostbusNummer}" editable="{helper>/ui/editable}"/>
+								<Label text="Postcode"/>
+								<Input value="{helper>/store/zakenpartner/details/PostbusPostcode}" editable="{helper>/ui/editable}"/>
+								<Label text="Plaats"/>
+								<Input value="{helper>/store/zakenpartner/details/PostbusPlaats}" editable="{helper>/ui/editable}"/>
+								<Toolbar>
+									<Title text="Communicatie" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="Telefoonnummer"/>
+								<Input value="{helper>/store/zakenpartner/details/Telefoon}" editable="{helper>/ui/editable}"/>
+								<Label text="Mobiel nummer"/>
+								<Input value="{helper>/store/zakenpartner/details/Mobiel}" editable="{helper>/ui/editable}"/>
+								<Label text="Email adres"/>
+								<Input value="{helper>/store/zakenpartner/details/Email}" editable="{helper>/ui/editable}"/>
+								<Label text="Website"/>
+								<Input value="{helper>/store/zakenpartner/details/Website}" editable="{helper>/ui/editable}"/>
+								<Toolbar>
+									<Title text="Identificatie nummers" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="KvK" visible="{/ui/organisatie}"/>
+								<Input value="{helper>/store/zakenpartner/details/KvkNummer}" required="true" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
+								<Label text="Soort vestiging" visible="{helper>/ui/organisatie}"/>
+								<Input value="{helper>/store/zakenpartner/details/SoortVestiging}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
+								<Label text="Vestigingsnummer" visible="{helper>/ui/organisatie}"/>
+								<Input value="{helper>/store/zakenpartner/details/KvkVestiging}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
+								<Label text="BTW nummer" visible="{helper>/ui/organisatie}"/>
+								<Input value="{helper>/store/zakenpartner/details/BtwNummer}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
+								<Label text="BSN" visible="{helper>/ui/persoon}"/>
+								<Input value="{helper>/store/zakenpartner/details/Bsn}" visible="{helper>/ui/persoon}" editable="{helper>/ui/editable}"/>
+								<Toolbar ariaLabelledBy="Title5">
+									<Title text="Organisatie" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="Provincie Noord-Brabant"/>
+								<CheckBox text="Bedrijf 1000 - Provincie Noord-Brabant" selected="{helper>/store/zakenpartner/details/Bedrijf1000}" editable="{helper>/ui/editable}"/>
+								<Label text="GOB"/>
+								<CheckBox text="Bedrijf 6000 - GOB" selected="{helper>/store/zakenpartner/details/Bedrijf6000}" editable="{helper>/ui/editable}"/>
+							</f:content>
+						</f:SimpleForm>
+					</IconTabFilter>
+					<IconTabFilter text="Bankgegevens">
+						<Table id="ins" items="{helper>/store/zakenpartner/details/BankDetails/results}" mode="{ path : 'helper>/ui/editable', formatter: '.formatter.formatDeleteMode'}" delete="onPressDeleteBankRow">
+							<headerToolbar>
+								<Toolbar>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://add" text="Nieuwe bankgegevens" press="onPressAddBankRow" visible="{helper>/ui/editable}"/>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column>
+									<Text text="Bank rekening"/>
+								</Column>							
+								<Column>
+									<Text text="Bank IBAN"/>
+								</Column>
+								<Column>
+									<Text text="Bank id"/>
+								</Column>
+								<Column>
+									<Text text="Bank sleutel"/>
+								</Column>
+								<Column>
+									<Text text="Rekeninghouder"/>
+								</Column>
+								<Column>
+									<Text text="Land"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Input value="{helper>Bankrekening}" editable="{helper>/ui/editable}"/>
+										<Input value="{helper>Bankiban}" editable="{helper>/ui/editable}"/>
+										<Input value="{helper>Bankid}" editable="{helper>/ui/editable}"/>										
+										<Input value="{helper>Bankkey}" editable="{helper>/ui/editable}"/>
+										<Input value="{helper>BankibanRekhouder}" editable="{helper>/ui/editable}"/>
+										<Input value="{helper>Bankland}" editable="{helper>/ui/editable}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabFilter text="Rollen">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+							singleContainerFullSize="false" ariaLabelledBy="Telefoon">
+							<f:content>
+								<Toolbar>
+									<Title text="Voor Vastgoed administratie" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="Rol Contractant"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolContractant}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Medecontractant"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolMedecontractant}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Kadaster"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolKadaster}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Kadasterkantoor"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolKadasterkantoor}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Aankopende Partij"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolAankopendePartij}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Verhuurder"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolVerhuurder}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Notaris"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolNotaris}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Contactpersoon"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolContactpersoon}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Contractpartner"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolContractpartner}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Verzekeraar"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolVerzekeraar}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Vastgoedbeheerder"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolVastgoedbeheerder}" editable="{helper>/ui/editable}"/>
+								<Toolbar ariaLabelledBy="Title5">
+									<Title text="Voor Inkoop/Verkoop administratie" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="Rol leverancier"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolLeverancier}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol klant"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolKlant}" editable="{helper>/ui/editable}"/>
+								<Toolbar>
+									<Title text="Voor Financiële administratie" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="Rol Debiteur"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolDebiteur}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Crediteur"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolCrediteur}" editable="{helper>/ui/editable}"/>
+								<Toolbar>
+									<Title text="Voor Subsidie administratie" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="Rol Subsidies - !!!!! HIER IS GEEN VELD VOOR?"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolSubsidies}" editable="{helper>/ui/editable}"/>
+							</f:content>
+						</f:SimpleForm>
+					</IconTabFilter>
 				</items>
-			</Table>
+			</IconTabBar>
 		</semantic:content>
-
+		<semantic:messagesIndicator>
+			<semantic:MessagesIndicator press="onMessagesButtonPress"/>
+		</semantic:messagesIndicator>
+		<!-- Custom Footer Content-->
+		<semantic:footerCustomActions>
+			<Button text="Wijzigen" press="onPressEdit" visible="{= !${helper>/ui/editable}}"/>
+			<Button text="Bewaren" press="onPressSave" visible="{helper>/ui/editable}"/>
+			<Button text="Annuleren" press="onPressCancel" visible="{helper>/ui/editable}"/>
+		</semantic:footerCustomActions>
 	</semantic:SemanticPage>
-
 </mvc:View>

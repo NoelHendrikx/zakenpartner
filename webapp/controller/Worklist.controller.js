@@ -1,18 +1,18 @@
 /*global location history */
 sap.ui.define(
   [
-    "nl/peppieportals/overzichttijdgegevens/controller/BaseController",
-    "nl/peppieportals/overzichttijdgegevens/model/formatter",
-    "nl/peppieportals/overzichttijdgegevens/model/models",
+    "nl/peppieportals/zakenpartner/controller/BaseController",
+    "nl/peppieportals/zakenpartner/model/formatter",
+    "nl/peppieportals/zakenpartner/model/models",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/routing/History",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
   ],
-  function(BaseController, formatter, models, JSONModel, History, Filter, FilterOperator) {
+  function (BaseController, formatter, models, JSONModel, History, Filter, FilterOperator) {
     "use strict";
 
-    return BaseController.extend("nl.peppieportals.overzichttijdgegevens.controller.Worklist", {
+    return BaseController.extend("nl.peppieportals.zakenpartner.controller.Worklist", {
       formatter: formatter,
 
       /* =========================================================== */
@@ -23,7 +23,7 @@ sap.ui.define(
        * Called when the worklist controller is instantiated.
        * @public
        */
-      onInit: function() {
+      onInit: function () {
         var oViewModel,
           iOriginalBusyDelay,
           oTable = this.byId("table");
@@ -46,51 +46,14 @@ sap.ui.define(
           shareSendEmailSubject: this.getResourceBundle().getText("shareSendEmailWorklistSubject"),
           shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href]),
           tableNoDataText: this.getResourceBundle().getText("tableNoDataText"),
-          tableBusyDelay: 0
+          tableBusyDelay: 0,
         });
         this.setModel(oViewModel, "worklistView");
-
-        // Make sure, busy indication is showing immediately so there is no
-        // break after the busy indication for loading the view's meta data is
-        // ended (see promise 'oWhenMetadataIsLoaded' in AppController)
-        oTable.attachEventOnce("updateFinished", function() {
-          // Restore original busy indicator delay for worklist's table
-          oViewModel.setProperty("/tableBusyDelay", iOriginalBusyDelay);
-        });
-        // Add the worklist page to the flp routing history
-        this.addHistoryEntry(
-          {
-            title: this.getResourceBundle().getText("worklistViewTitle"),
-            icon: "sap-icon://table-view",
-            intent: "#Overzichttijdgegevens-display"
-          },
-          true
-        );
-      },
-
-      onAfterRendering: function() {
-        var oModel = this.getView().getModel("helper");
-
-        models.getEmployeeDetailData().then(function(oData) {
-          oModel.setProperty("/store/userdata", oData);
-          oModel.setProperty("/ui/busy", false);
-        });
       },
 
       /* =========================================================== */
       /* event handlers                                              */
       /* =========================================================== */
-
-      onSelectRadio: function(oEvt) {
-        this.getModel("helper").setProperty(
-          "/filter/intern",
-          oEvt
-            .getSource()
-            .getSelectedButton()
-            .getText() === "Intern"
-        );
-        this.onFilterGetData();
-      },
 
       /**
        * Triggered by the table's 'updateFinished' event: after new table
@@ -101,21 +64,20 @@ sap.ui.define(
        * @param {sap.ui.base.Event} oEvent the update finished event
        * @public
        */
-      onUpdateFinished: function(oEvent) {
-        // update the worklist's object counter after the table update
-        var sTitle,
-          oTable = oEvent.getSource(),
-          iTotalItems = oEvent.getParameter("total");
+      onUpdateFinished: function (oEvent) {
 
-        var bIntern = this.getModel("helper").getProperty("/filter/intern");
-        // only update the counter if the length is final and
-        // the table is not empty
-        if (iTotalItems && oTable.getBinding("items").isLengthFinal()) {
-          sTitle = this.getResourceBundle().getText(bIntern ? "intern" : "extern", [iTotalItems]);
-        } else {
-          sTitle = this.getResourceBundle().getText("worklistTableTitle");
-        }
-        this.getModel("worklistView").setProperty("/worklistTableTitle", sTitle);
+      },
+
+      onPressCreateZakenpartnerBedrijf: function () {
+        this.getRouter().navTo("aanmaken", {
+          objectId: "2"
+        });
+      },
+
+      onPressCreateZakenpartnerPersoon: function () {
+        this.getRouter().navTo("aanmaken", {
+          objectId: "1"
+        });
       },
 
       /**
@@ -123,7 +85,7 @@ sap.ui.define(
        * @param {sap.ui.base.Event} oEvent the table selectionChange event
        * @public
        */
-      onPress: function(oEvent) {
+      onPress: function (oEvent) {
         // The source is the list item that got pressed
         this._showObject(oEvent.getSource());
       },
@@ -132,21 +94,21 @@ sap.ui.define(
        * Event handler when the share in JAM button has been clicked
        * @public
        */
-      onShareInJamPress: function() {
+      onShareInJamPress: function () {
         var oViewModel = this.getModel("worklistView"),
           oShareDialog = sap.ui.getCore().createComponent({
             name: "sap.collaboration.components.fiori.sharing.dialog",
             settings: {
               object: {
                 id: location.href,
-                share: oViewModel.getProperty("/shareOnJamTitle")
-              }
-            }
+                share: oViewModel.getProperty("/shareOnJamTitle"),
+              },
+            },
           });
         oShareDialog.open();
       },
 
-      onSearch: function(oEvent) {
+      onSearch: function (oEvent) {
         if (oEvent.getParameters().refreshButtonPressed) {
           // Search field's 'refresh' button has been pressed.
           // This is visible if you select any master list item.
@@ -158,100 +120,20 @@ sap.ui.define(
           var sQuery = oEvent.getParameter("query");
 
           if (sQuery && sQuery.length > 0) {
-            aFilters = [
-              new Filter({
-                filters: [
-                  new Filter("Ename", FilterOperator.Contains, sQuery),
-                  new Filter("Nachn", FilterOperator.Contains, sQuery),
-                  new Filter("Rufnm", FilterOperator.Contains, sQuery)
-                ],
-                and: false
-              })
-            ];
+            aFilters = [new Filter("Zoekargument", FilterOperator.Contains, sQuery)];
           }
           this._applySearch(aFilters);
         }
       },
-
-
-      onChangeFilterOrgUnit: function(oEvent) {
-	      var aFilters = [];
-	      var sQuery = oEvent.getSource().getSelectedKey();
-
-	      if (sQuery && sQuery.length > 0) {
-	        aFilters = [
-	          new Filter({
-	            filters: [
-	              new Filter("OrgShort", FilterOperator.EQ, sQuery)
-	            ],
-	            and: false
-	          })
-	        ];
-	      }
-	      this._applySearch(aFilters);
-     },
-
 
       /**
        * Event handler for refresh event. Keeps filter, sort
        * and group settings and refreshes the list binding.
        * @public
        */
-      onRefresh: function() {
+      onRefresh: function () {
         var oTable = this.byId("table");
         oTable.getBinding("items").refresh();
-      },
-
-      onFilterGetData: function(oEvt) {
-        var oIntern = this.getView().byId("rbIntern");
-        var oModel = this.getModel("helper");
-
-        if (!oModel.getProperty("/ui/busy")) {
-          oModel.setProperty("/ui/busy", true);
-          oModel.setProperty("/store/timedata", null);
-          models.getTimeData(this._getFilterOptions(oModel)).then(function(oData) {
-            oModel.setProperty("/store/timedata", oData);
-            this.updateOrgUnit(oModel, oData);
-            oModel.setProperty("/ui/busy", false);
-          }.bind(this));
-        }
-      },
-
-	 updateOrgUnit : function(oModel, oData){
-	 	var aOrgUnits = [];
-	 	var aPushedOrgUnits = [];
-	 	oData.results.forEach(function(oItm){
-	 		aOrgUnits[oItm.OrgShort] = oItm.OrgStext;
-	 	});
-	 	for (var prop in aOrgUnits){
-	 		aPushedOrgUnits.push( { OrgShort : prop, OrgStext : aOrgUnits[prop] });
-	 	}
-	 	oModel.setProperty('/valuehelp/orgunits', aPushedOrgUnits);
-		oModel.setProperty('/ui/showOrgUnitColumn', aPushedOrgUnits.length > 1);
-	 },
-
-      _getFilterOptions: function(oModel) {
-        var aFilters = [];
-
-        var sTotenMet = this.getView()
-          .byId("searchTo")
-          .getDateValue();
-        var sJaar = sTotenMet.getFullYear();
-        var bIntern = oModel.getProperty("/filter/intern");
-        var sUserId = oModel.getProperty("/store/userdata/Userid");
-
-        var aFilters = [
-          new Filter({
-            filters: [
-              new Filter("SelUserid", FilterOperator.EQ, sUserId),
-              new Filter("SelJaar", FilterOperator.EQ, sJaar),
-              new Filter("SelDatumTot", FilterOperator.EQ, sTotenMet),
-              new Filter("SelMdwSoort", FilterOperator.EQ, bIntern ? "I" : "E")
-            ],
-            and: true
-          })
-        ];
-        return aFilters;
       },
 
       /* =========================================================== */
@@ -264,32 +146,11 @@ sap.ui.define(
        * @param {sap.m.ObjectListItem} oItem selected Item
        * @private
        */
-      _showObject: function(oItem) {
-        var oObj = oItem.getBindingContext("helper").getObject();
-        var sBegda =
-          ("0" + oObj.Begda.getDate()).slice(-2) +
-          "." +
-          ("0" + (oObj.Begda.getMonth() + 1)).slice(-2) +
-          "." +
-          oObj.Begda.getFullYear();
-        var sEndda =
-          ("0" + oObj.Endda.getDate()).slice(-2) +
-          "." +
-          ("0" + (oObj.Endda.getMonth() + 1)).slice(-2) +
-          "." +
-          oObj.Endda.getFullYear();
+      _showObject: function (oItem) {
+        var oObj = oItem.getBindingContext().getObject();
 
-        this.getModel("helper").setProperty("/store/timedetails/current", {
-          Pernr: oObj.Pernr,
-          Ename: oObj.Ename,
-          Begda: oObj.Begda,
-          Endda: oObj.Endda
-        });
-
-        this.getRouter().navTo("object", {
-          objectId: oObj.Pernr,
-          begda: sBegda,
-          endda: sEndda
+        this.getRouter().navTo("tonen", {
+          objectId: oObj.Partner,
         });
       },
 
@@ -298,7 +159,7 @@ sap.ui.define(
        * @param {sap.ui.model.Filter[]} aTableSearchState An array of filters for the search
        * @private
        */
-      _applySearch: function(aTableSearchState) {
+      _applySearch: function (aTableSearchState) {
         var oTable = this.byId("table"),
           oViewModel = this.getModel("worklistView");
         oTable.getBinding("items").filter(aTableSearchState, "Application");
@@ -306,8 +167,7 @@ sap.ui.define(
         if (aTableSearchState.length !== 0) {
           oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
         }
-      }
-      
+      },
     });
   }
 );

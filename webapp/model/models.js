@@ -11,159 +11,166 @@ sap.ui.define(
 		"use strict";
 
 		return {
-			_oDataModel: null,
-			_oDataModelWTR: null,
+      _oDataModel: null,
+      _oDataModelWTR: null,
 
-			createDeviceModel: function () {
-				var oModel = new JSONModel(Device);
-				oModel.setDefaultBindingMode("OneWay");
-				return oModel;
-			},
+      createDeviceModel: function () {
+        var oModel = new JSONModel(Device);
+        oModel.setDefaultBindingMode("OneWay");
+        return oModel;
+      },
 
-			createAppModel: function () {
-				var oToday = new Date();
+      createAppModel: function () {
+        var oModel = new JSONModel({
+          store: {
+            zakenpartner: {
+              results: [],
+              details: this.getInitialStructure(),
+            },
+            userdata: {},
+          },
+          ui: {
+            busy: true,
+            editable: false,
+          },
+          valuehelp: {},
+        });
+        oModel.setDefaultBindingMode("TwoWay");
+        return oModel;
+      },
 
-				var month = oToday.getUTCMonth() + 1; //months from 1-12
-				var day = oToday.getUTCDate();
-				var year = oToday.getUTCFullYear();
+      getInitialStructure : function(){
+        return {
+          Achternaam: "",
+          BankDetails:{ results : [this.getBankDetail()]},
+          Bedrijf1000: false,
+          Bedrijf6000: false,
+          Bsn: "",
+          BtwNummer: "",
+          Email: "",
+          Gm: false,
+          GmMoAantekening: false,
+          GmOsrNaam: "",
+          GmSoortPartner: "",
+          Iban: "",
+          IbanRekhouder: "",
+          Initialen: "",
+          KvkNummer: "",
+          KvkVestiging: "",
+          Landcode: "NL",
+          Mobiel: "",
+          Naam1: "",
+          Naam2: "",
+          Opmerking: "",
+          Partner: "",
+          Plaats: "",
+          PostbusNummer: "",
+          PostbusPlaats: "",
+          PostbusPostcode: "",
+          Postcode: "",
+          RolAankopendePartij: false,
+          RolContactpersoon: false,
+          RolContractant: false,
+          RolContractpartner: false,
+          RolCrediteur: false,
+          RolDebiteur: false,
+          RolKadaster: false,
+          RolKadasterkantoor: false,
+          RolKlant: false,
+          RolLeverancier: false,
+          RolMedecontractant: false,
+          RolNotaris: false,
+          RolVastgoed: false,
+          RolVerhuurder: false,
+          RolVerkopendePartij: false,
+          RolVerzeker: false,
+          SoortVestiging: "",
+          SoortZakenpartner: "1",
+          StraatHuisnr: "",
+          StraatNaam: "",
+          StraatToevoeging: "",
+          Telefoon: "",
+          Voornaam: "",
+          Website: "",
+          Zoekargument: ""
+        }   
+      },
 
-				var newdate = year + "-" + month + "-" + day;
+      getBankDetail : function(){
+        return {
+            Bankiban: "",
+            BankibanRekhouder: "",
+            Bankid: "",
+            Bankkey: "",
+            Bankland: "",
+            Bankrekening: "",
+            Partner: ""
+        }
+      },
 
-				var oModel = new JSONModel({
-					store: {
-						timedata: {
-							results: []
-						},
-						timedetails: {
-							results: [],
-							current: {
-								Pernr: null,
-								Ename: null,
-								Begda: null,
-								Endda: null
-							}
-						},
-						userdata: {}
-					},
-					filter: {
-						jaar: new Date().getFullYear(),
-						startdatum: null,
-						totenmet: newdate,
-						intern: true
-					},
-					ui: {
-						busy: true,
-						showOrgUnitColumn: false
-					},
-					valuehelp: {
-						orgunits: null
-					}
-				});
-				return oModel;
-			},
+      getZakenpartnerData: function (sPartner) {
+        var oDataModel = this._getODataModel();
 
-			getEmployeeDetailData: function (oModel) {
-				var oDataModel = this._getODataModel();
+        return new Promise(function (resolve, reject) {
+          oDataModel.read("/ZakenpartnerMutatieSet('" + sPartner + "')", {
+            urlParameters: {
+              $expand: "BankDetails",
+            },
+            success: function (oData) {
+              if (oData) {
+                // if there is data, resolve promise
+                resolve(oData);
+              } else {
+                reject({
+                  message: "Geen zakenpartner informatie gevonden",
+                  responseText: "nodata",
+                });
+              }
+            },
+            error: function (oError) {
+              reject(oError);
+            },
+          });
+        });
+      },
 
-				return new Promise(function (resolve, reject) {
-					oDataModel.read("/Employees('')", {
-						success: function (oData) {
-							if (oData) {
-								// if there is data, resolve promise
-								resolve(oData);
-							} else {
-								reject({
-									message: "Geen employee informatie gevonden",
-									responseText: "nodata"
-								});
-							}
-						},
-						error: function (oError) {
-							reject(oError);
-						}
-					});
-				});
-			},
+      createZakenpartnerData: function (oPostData) {
+        var oDataModel = this._getODataModel();
+        
+        return new Promise(function (resolve, reject) {
+          oDataModel.create("/ZakenpartnerMutatieSet", oPostData, {
+            success: function (oData) {
+              if (oData) {
+                // if there is data, resolve promise
+                resolve(oData);
+              } else {
+                reject({
+                  message: "Geen zakenpartner informatie gevonden",
+                  responseText: "nodata",
+                });
+              }
+            },
+            error: function (oError) {
+              reject(oError);
+            },
+          });
+        });
+      },
 
-			getTimeData: function (aFilters) {
-				var oDataModel = this._getODataModelWTR();
 
-				return new Promise(function (resolve, reject) {
-					oDataModel.read("/TeamTimeDataSet", {
-						filters: aFilters,
-						// urlParameters : {
-						//   "$top" : "10"
-						// },
-						success: function (oData) {
-							if (oData) {
-								// if there is data, resolve promise
-								resolve(oData);
-							} else {
-								reject({
-									message: "Geen employee informatie gevonden",
-									responseText: "nodata"
-								});
-							}
-						},
-						error: function (oError) {
-							reject(oError);
-						}
-					});
-				});
-			},
 
-			getEmpTimeDataSet: function (aFilters) {
-				var oDataModel = this._getODataModelWTR();
 
-				return new Promise(function (resolve, reject) {
-					oDataModel.read("/MWTimeDataSet", {
-						filters: aFilters,
-						success: function (oData) {
-							if (oData) {
-								// if there is data, resolve promise
-								resolve(oData);
-							} else {
-								reject({
-									message: "Geen employee informatie gevonden",
-									responseText: "nodata"
-								});
-							}
-						},
-						error: function (oError) {
-							reject(oError);
-						}
-					});
-				});
-			},
-
-			/**
-			 * generic reference to odata service ZPNB_HR_GEN_SRV
-			 */
-			_getODataModel: function () {
-				if (!this._oDataModel) {
-					this._oDataModel = new ODataModel(
-						"/sap/opu/odata/sap/ZPNB_HR_GEN_SRV"
-					);
-					this._oDataModel.setDefaultCountMode(CountMode.None);
-					this._oDataModel.setUseBatch(false);
-				}
-				return this._oDataModel;
-			},
-
-			/**
-			 * generic reference to odata service ZPNB_HR_GEN_SRV
-			 */
-			_getODataModelWTR: function () {
-				if (!this._oDataModelWTR) {
-					this._oDataModelWTR = new ODataModel(
-						"/sap/opu/odata/sap/ZPNB_HR_WTR_SRV"
-					);
-					this._oDataModelWTR.setDefaultCountMode(CountMode.None);
-					this._oDataModelWTR.setUseBatch(false);
-				}
-				return this._oDataModelWTR;
-			}
-
-		};
+      /**
+       * generic reference to odata service ZPNB_ZAKENPARTNER_SRV
+       */
+      _getODataModel: function () {
+        if (!this._oDataModel) {
+          this._oDataModel = new ODataModel("/sap/opu/odata/sap/ZPNB_ZAKENPARTNER_SRV");
+          this._oDataModel.setDefaultCountMode(CountMode.None);
+          this._oDataModel.setUseBatch(false);
+        }
+        return this._oDataModel;
+      },
+    };
 	}
 );

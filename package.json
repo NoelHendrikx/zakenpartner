@@ -1,15 +1,15 @@
 {
-  "name": "overzichttijdgegevens",
+  "name": "zakenpartner",
   "version": "0.0.2",
   "description": "",
   "private": true,
   "devDependencies": {
-    "@sap/ui5-builder-webide-extension": "1.0.4",
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/plugin-transform-modules-commonjs": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
-    "@ui5/cli": "^1.5.0",
+    "@sap/ui5-builder-webide-extension": "1.0.4",
+    "@ui5/cli": "^1.14.0",
     "@ui5/logger": "^1.0.1",
     "nwabap-ui5uploader": "^0.3.4",
     "rimraf": "^2.6.3"

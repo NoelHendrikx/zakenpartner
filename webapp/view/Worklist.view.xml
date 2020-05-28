@@ -1,75 +1,38 @@
-<mvc:View controllerName="nl.peppieportals.overzichttijdgegevens.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+<mvc:View controllerName="nl.peppieportals.zakenpartner.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core">
 	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="{/store/features/IsHrAdmin}">
 		<semantic:titleHeading>
 			<Title text="{i18n>worklistTitle}"/>
 		</semantic:titleHeading>
 		<semantic:content>
-			<Table id="table" width="auto" items="{ path: 'helper>/store/timedata/results',
-				sorter : {
-	              path : 'Nachn' 
-	           }
-			 }" growing="true" growingScrollToLoad="true" growingThreshold="50" updateFinished="onUpdateFinished" class="sapUiNoMargin" busy="{helper>/ui/busy}" busyIndicatorDelay="0" 
+			<Table id="table" width="auto" items="{ path: '/ZakenpartnerMutatieSet' }" growing="true" growingScrollToLoad="true" growingThreshold="30" updateFinished="onUpdateFinished" class="sapUiNoMargin" busy="{helper>/ui/busy}" busyIndicatorDelay="0" 
 				 noDataText="{i18n>nodata}">
 				<headerToolbar>
 					<Toolbar>
 						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
 						<ToolbarSpacer/>
-						<ComboBox visible="{helper>/ui/showOrgUnitColumn}" width="20rem"
-								items="{path: 'helper>/valuehelp/orgunits', sorter : { path : 'OrgStext'}}" change="onChangeFilterOrgUnit">
-							<core:ListItem key="{helper>OrgShort}" text="{helper>OrgStext}"/>
-						</ComboBox>
-						<RadioButtonGroup id="rbIntern" select="onSelectRadio" columns="2">
-							<buttons>
-								<RadioButton groupName="GroupA" text="Intern" selected="true"/>
-								<RadioButton groupName="GroupA" text="Extern" />
-							</buttons>
-						</RadioButtonGroup>
-
-						<Label text="01-01 t/m"/>
-						<DatePicker displayFormat="dd-MM-yyyy"  width="8rem" value="{helper>/filter/totenmet}"
-							change="onFilterGetData"
-							placeholder="tot en met" id="searchTo"/>
-						<Button text="Ophalen" press="onFilterGetData" />
+						<Button icon="sap-icon://add" text="Nieuw bedrijf" press="onPressCreateZakenpartnerBedrijf" />
+						<Button icon="sap-icon://add" text="Nieuw persoon" press="onPressCreateZakenpartnerPersoon"/>
 						<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search="onSearch" width="auto"></SearchField>
 					</Toolbar>
 				</headerToolbar>
 				<columns>
-					<Column>
-						<Text text="{i18n>nachn}" tooltip="{i18n>tt_nachn}"/></Column>
-					<Column><Text text="{i18n>rufn}" tooltip="{i18n>tt_rufn}"/></Column>
-					<Column width="15rem">
-						<Text text="{i18n>ename}" tooltip="{i18n>tt_ename}"/>
-					</Column>
-					<Column visible="{helper>/ui/showOrgUnitColumn}"><Text text="{i18n>orgunit}" tooltip="{i18n>orgunit}"/></Column>
-					<Column hAlign="Right" visible="{helper>/filter/intern}"><Text text="{i18n>variabel_sald}" tooltip="{i18n>tt_variabel_sald}"/></Column>
-					<Column hAlign="Center" width="5rem" visible="{helper>/filter/intern}"><Text text="{i18n>indicator}" tooltip="{i18n>tt_indicator}"/></Column>
-					<Column hAlign="Right" visible="{helper>/filter/intern}"><Text text="{i18n>grenswaarde}" tooltip="{i81m>tt_grenswaarde}"/></Column>
-					<Column hAlign="Right"><Text text="{i18n>contra}" tooltip="{i18n>tt_contra}"/></Column>
-					<Column hAlign="Right" visible="{helper>/filter/intern}"><Text text="{i18n>planuren}" tooltip="{i18n>tt_planuren}"/></Column>
-					<Column hAlign="Right"><Text text="{i18n>klokuren}" tooltip="{i18n>tt_klokuren}"/></Column>
-					<Column hAlign="Right"><Text text="{i18n>schrijfuren}" tooltip="{i18n>tt_schrijfuren}"/></Column>
+					<Column><Text text="{i18n>naam}"/></Column>
+					<Column><Text text="{i18n>soortzakenpartner}"/></Column>
+					<Column><Text text="{i18n>partnernr}"/></Column>
+					<Column><Text text="{i18n>postcode}"/></Column>
+					<Column><Text text="{i18n>plaats}"/></Column>					
+					
 				</columns>
 				<items>
 					<ColumnListItem type="Navigation" press="onPress">
 						<cells>
-							<ObjectAttribute text="{helper>Nachn}"/>
-							<ObjectAttribute text="{helper>Rufnm}"/>
-							<ObjectAttribute text="{helper>Ename}"/>
-							<ObjectIdentifier text="{helper>OrgStext}" title="{helper>OrgShort}" visible="{/ui/showOrgUnitColumn}"/>
-							<ObjectAttribute text="{path : 'helper>VariabelSaldo', formatter: '.formatter.formatVariabelSaldoDecimals'}" visible="{helper>/filter/intern}"/>
-							<core:Icon tooltip="" src="{parts : 
-								[ { path : 'helper>VariabelSaldo' },
-								  { path : 'helper>ContractUren' }
-								], formatter : '.formatter.formatVariabelSaldo'}"  color="{parts : 
-								[ { path : 'helper>VariabelSaldo' },
-								  { path : 'helper>ContractUren' }
-								], formatter : '.formatter.formatVariabelSaldoColor'}" visible="{helper>/filter/intern}"/>
-							<ObjectAttribute text="{path : 'helper>ContractUren', formatter: '.formatter.formatGrensWaarde'}" visible="{helper>/filter/intern}"/>
-							<ObjectNumber number="{helper>ContractUren}" unit="uur"/>
-							<ObjectNumber number="{helper>PlanUren}" unit="uur" visible="{helper>/filter/intern}"/>
-							<ObjectNumber number="{helper>KlokUren}" unit="uur"/>
-							<ObjectNumber number="{helper>SchrijfUren}" unit="uur"/>
+							<ObjectAttribute text="{Voornaam} {Achternaam} {Naam1}"/>
+							<ObjectAttribute text="{path : 'SoortZakenpartner', formatter: '.formatter.formatZakenPartner'}"/>
+							<ObjectAttribute text="{Partner}"/>
+							<ObjectAttribute text="{Postcode}"/>
+							<ObjectAttribute text="{Plaats}"/>														
+						
 						</cells>
 					</ColumnListItem>
 				</items>
