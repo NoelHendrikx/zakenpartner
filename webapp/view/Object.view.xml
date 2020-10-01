@@ -68,7 +68,17 @@
 								<Label text="KvK" visible="{/ui/organisatie}"/>
 								<Input value="{helper>/store/zakenpartner/details/KvkNummer}" required="true" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
 								<Label text="Soort vestiging" visible="{helper>/ui/organisatie}"/>
-								<Input value="{helper>/store/zakenpartner/details/SoortVestiging}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
+								<Select
+									editable="{helper>/ui/editable}"
+
+									forceSelection="false"
+									selectedKey="{helper>/store/zakenpartner/details/SoortVestiging}"
+									items="{
+										path: 'helper>/valuehelp/zakenpartner/soort_vestiging'
+									}">
+									<core:Item key="{helper>key}" text="{helper>label}"/>
+								</Select>
+								
 								<Label text="Vestigingsnummer" visible="{helper>/ui/organisatie}"/>
 								<Input value="{helper>/store/zakenpartner/details/KvkVestiging}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
 								<Label text="BTW nummer" visible="{helper>/ui/organisatie}"/>
@@ -82,6 +92,11 @@
 								<CheckBox text="Bedrijf 1000 - Provincie Noord-Brabant" selected="{helper>/store/zakenpartner/details/Bedrijf1000}" editable="{helper>/ui/editable}"/>
 								<Label text="GOB"/>
 								<CheckBox text="Bedrijf 6000 - GOB" selected="{helper>/store/zakenpartner/details/Bedrijf6000}" editable="{helper>/ui/editable}"/>
+								<Toolbar>
+									<Title text="Opmerkingen" level="H5" titleStyle="H5"/>
+								</Toolbar>
+								<Label text="Opmerkingen"/>
+								<Input value="{helper>/store/zakenpartner/details/Opmerking}" editable="{helper>/ui/editable}"/>
 							</f:content>
 						</f:SimpleForm>
 					</IconTabFilter>
@@ -130,40 +145,39 @@
 					<IconTabFilter text="Rollen">
 						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
 							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
-							singleContainerFullSize="false" ariaLabelledBy="Telefoon">
+							singleContainerFullSize="false">
 							<f:content>
 								<Toolbar>
 									<Title text="Voor Vastgoed administratie" level="H5" titleStyle="H5"/>
 								</Toolbar>
+								<Label text="Rol Aankopende Partij"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolAankopendePartij}" editable="{helper>/ui/editable}"/>
 								<Label text="Rol Contractant"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolContractant}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Medecontractant"/>
-								<CheckBox selected="{helper>/store/zakenpartner/details/RolMedecontractant}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Contractpartner"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolContractpartner}" editable="{helper>/ui/editable}"/>
 								<Label text="Rol Kadaster"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolKadaster}" editable="{helper>/ui/editable}"/>
 								<Label text="Rol Kadasterkantoor"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolKadasterkantoor}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Aankopende Partij"/>
-								<CheckBox selected="{helper>/store/zakenpartner/details/RolAankopendePartij}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Verhuurder"/>
-								<CheckBox selected="{helper>/store/zakenpartner/details/RolVerhuurder}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Medecontractant"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolMedecontractant}" editable="{helper>/ui/editable}"/>
 								<Label text="Rol Notaris"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolNotaris}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Contactpersoon"/>
-								<CheckBox selected="{helper>/store/zakenpartner/details/RolContactpersoon}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Contractpartner"/>
-								<CheckBox selected="{helper>/store/zakenpartner/details/RolContractpartner}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Verzekeraar"/>
-								<CheckBox selected="{helper>/store/zakenpartner/details/RolVerzekeraar}" editable="{helper>/ui/editable}"/>
 								<Label text="Rol Vastgoedbeheerder"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolVastgoedbeheerder}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Verhuurder"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolVerhuurder}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Verkopende partij"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolVerkopendePartij}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Verzekeraar"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolVerzekeraar}" editable="{helper>/ui/editable}"/>
+
 								<Toolbar ariaLabelledBy="Title5">
 									<Title text="Voor Inkoop/Verkoop administratie" level="H5" titleStyle="H5"/>
 								</Toolbar>
 								<Label text="Rol leverancier"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolLeverancier}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol klant"/>
-								<CheckBox selected="{helper>/store/zakenpartner/details/RolKlant}" editable="{helper>/ui/editable}"/>
 								<Toolbar>
 									<Title text="Voor Financiële administratie" level="H5" titleStyle="H5"/>
 								</Toolbar>
@@ -174,8 +188,10 @@
 								<Toolbar>
 									<Title text="Voor Subsidie administratie" level="H5" titleStyle="H5"/>
 								</Toolbar>
-								<Label text="Rol Subsidies - !!!!! HIER IS GEEN VELD VOOR?"/>
-								<CheckBox selected="{helper>/store/zakenpartner/details/RolSubsidies}" editable="{helper>/ui/editable}"/>
+								<Label text="Rol Subsidies"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/Gm}" editable="{helper>/ui/editable}" select="onSelectShowCorsaNummer"/>
+								<Label text="Corsa nummer" visible="{helper>/ui/showcorsanummer}"/>
+								<Input value="{helper>/store/zakenpartner/details/CorsaNr}" visible="{helper>/ui/showcorsanummer}"/>
 							</f:content>
 						</f:SimpleForm>
 					</IconTabFilter>

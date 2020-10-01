@@ -5,9 +5,10 @@ sap.ui.define(
 		"sap/ui/model/odata/v2/ODataModel",
 		"sap/ui/model/odata/CountMode",
 		"sap/ui/model/Filter",
-		"sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    "nl/peppieportals/library/utils/models"
 	],
-	function (JSONModel, Device, ODataModel, CountMode, Filter, FilterOperator) {
+	function (JSONModel, Device, ODataModel, CountMode, Filter, FilterOperator, pnbmodels) {
 		"use strict";
 
 		return {
@@ -32,9 +33,14 @@ sap.ui.define(
           ui: {
             busy: true,
             editable: false,
+            showcorsanummer: false,
           },
           valuehelp: {},
         });
+        pnbmodels.getEntityLijstwaarde("ZBC_ZAKENPARTNER_MUTATIE").then(function (oValueHelp) {
+          console.log(oValueHelp);
+            oModel.setProperty("/valuehelp/zakenpartner", oValueHelp);
+          });
         oModel.setDefaultBindingMode("TwoWay");
         return oModel;
       },

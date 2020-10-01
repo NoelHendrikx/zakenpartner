@@ -5,8 +5,7 @@
 			<Title text="{i18n>worklistTitle}"/>
 		</semantic:titleHeading>
 		<semantic:content>
-			<Table id="table" width="auto" items="{ path: '/ZakenpartnerMutatieSet' }" growing="true" growingScrollToLoad="true" growingThreshold="30" updateFinished="onUpdateFinished" class="sapUiNoMargin" busy="{helper>/ui/busy}" busyIndicatorDelay="0" 
-				 noDataText="{i18n>nodata}">
+			<Table id="table" width="auto" items="{ path: '/ZakenpartnerMutatieSet' }" growing="true" growingScrollToLoad="true" growingThreshold="30" class="sapUiNoMargin" noDataText="{i18n>nodata}">
 				<headerToolbar>
 					<Toolbar>
 						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
@@ -20,6 +19,7 @@
 					<Column><Text text="{i18n>naam}"/></Column>
 					<Column><Text text="{i18n>soortzakenpartner}"/></Column>
 					<Column><Text text="{i18n>partnernr}"/></Column>
+					<Column><Text text="{i18n>kvknummer}"/></Column>
 					<Column><Text text="{i18n>postcode}"/></Column>
 					<Column><Text text="{i18n>plaats}"/></Column>					
 					
@@ -30,6 +30,7 @@
 							<ObjectAttribute text="{Voornaam} {Achternaam} {Naam1}"/>
 							<ObjectAttribute text="{path : 'SoortZakenpartner', formatter: '.formatter.formatZakenPartner'}"/>
 							<ObjectAttribute text="{Partner}"/>
+							<ObjectAttribute text="{KvkNummer}"/>
 							<ObjectAttribute text="{Postcode}"/>
 							<ObjectAttribute text="{Plaats}"/>														
 						

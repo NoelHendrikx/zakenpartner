@@ -9,8 +9,9 @@ sap.ui.define(
     "nl/peppieportals/zakenpartner/model/models",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
+    "sap/m/MessageToast"
   ],
-  function (BaseController, JSONModel, History, formatter, models, Filter, FilterOperator) {
+  function (BaseController, JSONModel, History, formatter, models, Filter, FilterOperator, MessageToast) {
     "use strict";
 
     return BaseController.extend("nl.peppieportals.zakenpartner.controller.Object", {
@@ -96,11 +97,17 @@ sap.ui.define(
           });
         } else {
           // zet zakenpartner type
+          oModel.setProperty("/store/zakenpartner/details", models.getInitialStructure());
           oModel.setProperty("/store/zakenpartner/details/SoortZakenpartner", sPartner);
           oModel.setProperty("/ui/organisatie", sPartner === "2");
           oModel.setProperty("/ui/persoon", sPartner === "1");
           oModel.setProperty("/ui/editable", true);
         }
+      },
+
+      onSelectShowCorsaNummer: function () {
+        var oModel = this.getModel("helper");
+        oModel.setProperty("/ui/showcorsanummer", !oModel.getProperty("/ui/showcorsanummer"));
       },
 
       onPressEdit: function () {
@@ -115,9 +122,14 @@ sap.ui.define(
 
       onPressSave: function () {
         var oModel = this.getModel("helper");
+        var that = this;
         var oPayload = oModel.getProperty("/store/zakenpartner/details");
         models.createZakenpartnerData(oPayload).then(function (oPartner) {
-          console.log("saved", oPartner);
+          MessageToast.show("Zakenpartner is aangevraagd en moet worden verwerkt.", {
+            duration: 3000,
+            closeOnBrowserNavigation: false,
+          });
+          that.getRouter().navTo("worklist");
         });
       },
 
