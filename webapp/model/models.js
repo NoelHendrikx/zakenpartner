@@ -38,7 +38,6 @@ sap.ui.define(
           valuehelp: {},
         });
         pnbmodels.getEntityLijstwaarde("ZBC_ZAKENPARTNER_MUTATIE").then(function (oValueHelp) {
-          console.log(oValueHelp);
             oModel.setProperty("/valuehelp/zakenpartner", oValueHelp);
           });
         oModel.setDefaultBindingMode("TwoWay");

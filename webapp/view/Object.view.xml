@@ -110,33 +110,17 @@
 							</headerToolbar>
 							<columns>
 								<Column>
-									<Text text="Bank rekening"/>
-								</Column>							
-								<Column>
 									<Text text="Bank IBAN"/>
 								</Column>
 								<Column>
-									<Text text="Bank id"/>
-								</Column>
-								<Column>
-									<Text text="Bank sleutel"/>
-								</Column>
-								<Column>
 									<Text text="Rekeninghouder"/>
-								</Column>
-								<Column>
-									<Text text="Land"/>
 								</Column>
 							</columns>
 							<items>
 								<ColumnListItem>
 									<cells>
-										<Input value="{helper>Bankrekening}" editable="{helper>/ui/editable}"/>
 										<Input value="{helper>Bankiban}" editable="{helper>/ui/editable}"/>
-										<Input value="{helper>Bankid}" editable="{helper>/ui/editable}"/>										
-										<Input value="{helper>Bankkey}" editable="{helper>/ui/editable}"/>
 										<Input value="{helper>BankibanRekhouder}" editable="{helper>/ui/editable}"/>
-										<Input value="{helper>Bankland}" editable="{helper>/ui/editable}"/>
 									</cells>
 								</ColumnListItem>
 							</items>
