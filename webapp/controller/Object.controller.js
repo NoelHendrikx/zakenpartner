@@ -86,7 +86,6 @@ sap.ui.define(
         var oArgs = oEvent.getParameter("arguments");
         var sRouteName = oEvent.getParameter("name");
 
-        console.log("evt", oEvent);
         var oModel = this.getModel("helper");
         var sPartner = oArgs.objectId; // tonen = zakenpartner id, aanmaken = type partner
 
