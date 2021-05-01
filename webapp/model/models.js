@@ -47,7 +47,7 @@ sap.ui.define(
       getInitialStructure : function(){
         return {
           Achternaam: "",
-          BankDetails:{ results : [this.getBankDetail()]},
+          BankDetails: { results: [this.getBankDetail()] },
           Bedrijf1000: false,
           Bedrijf6000: false,
           Bsn: "",
@@ -74,7 +74,13 @@ sap.ui.define(
           PostbusPostcode: "",
           Postcode: "",
           RolAankopendePartij: false,
+          RolBudgethouder: false,
           RolContactpersoon: false,
+          RolOpdrachtgever: false,
+          RolProjectleider: false,
+          RolPlaneconoom: false,
+          RolSubsidieaanvrager: false,
+          RolVastgoed: false,
           RolContractant: false,
           RolContractpartner: false,
           RolCrediteur: false,
@@ -85,7 +91,6 @@ sap.ui.define(
           RolLeverancier: false,
           RolMedecontractant: false,
           RolNotaris: false,
-          RolVastgoed: false,
           RolVerhuurder: false,
           RolVerkopendePartij: false,
           RolVerzeker: false,
@@ -97,8 +102,8 @@ sap.ui.define(
           Telefoon: "",
           Voornaam: "",
           Website: "",
-          Zoekargument: ""
-        }   
+          Zoekargument: "",
+        };   
       },
 
       getBankDetail : function(){

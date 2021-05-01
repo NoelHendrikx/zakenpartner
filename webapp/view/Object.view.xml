@@ -9,7 +9,7 @@
 		<semantic:content>
 			<IconTabBar id="idIconTabBarNoIcons" class="sapUiResponsiveContentPadding">
 				<items>
-					<IconTabFilter text="Zakenpartner">
+					<IconTabFilter text="Zakenpartner" >
 						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
 							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
 							singleContainerFullSize="false" ariaLabelledBy="Telefoon">
@@ -18,9 +18,9 @@
 									<Title text="Algemeen" level="H5" titleStyle="H5"/>
 								</Toolbar>
 								<Label text="Naam 1" visible="{helper>/ui/organisatie}"/>
-								<Input value="{helper>/store/zakenpartner/details/Naam1}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
+								<Input value="{helper>/store/zakenpartner/details/Naam1}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}" maxLength="40"/>
 								<Label text="Naam 2" visible="{helper>/ui/organisatie}"/>
-								<Input value="{helper>/store/zakenpartner/details/Naam2}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}"/>
+								<Input value="{helper>/store/zakenpartner/details/Naam2}" visible="{helper>/ui/organisatie}" editable="{helper>/ui/editable}" maxLength="40"/>
 								<Label text="Initialen" visible="{helper>/ui/persoon}"/>
 								<Input value="{helper>/store/zakenpartner/details/Initialen}" visible="{helper>/ui/persoon}" editable="{helper>/ui/editable}"/>
 								<Label text="Achternaam" visible="{helper>/ui/persoon}"/>
@@ -134,46 +134,57 @@
 								<Toolbar>
 									<Title text="Voor Vastgoed administratie" level="H5" titleStyle="H5"/>
 								</Toolbar>
-								<Label text="Rol Aankopende Partij"/>
+								<Label text="Aankopende Partij"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolAankopendePartij}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Contractant"/>
+
+								<Label text="Budgethouder"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolBudgethouder}" editable="{helper>/ui/editable}"/>
+
+								<Label text="Contractant"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolContractant}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Contractpartner"/>
+								<Label text="Contractpartner"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolContractpartner}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Kadaster"/>
+								<Label text="Kadaster"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolKadaster}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Kadasterkantoor"/>
+								<Label text="Kadasterkantoor"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolKadasterkantoor}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Medecontractant"/>
+								<Label text="Medecontractant"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolMedecontractant}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Notaris"/>
+								<Label text="Notaris"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolNotaris}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Vastgoedbeheerder"/>
-								<CheckBox selected="{helper>/store/zakenpartner/details/RolVastgoedbeheerder}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Verhuurder"/>
+								<Label text="Opdrachtgever"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolOpdrachtgever}" editable="{helper>/ui/editable}"/>
+								<Label text="Provinciale projectleider"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolProjectleider}" editable="{helper>/ui/editable}"/>
+								<Label text="Provinciale plan econoom"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolPlaneconoom}" editable="{helper>/ui/editable}"/>
+								
+								<Label text="Vastgoedbeheerder"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolVastgoed}" editable="{helper>/ui/editable}"/>
+								<Label text="Verhuurder"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolVerhuurder}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Verkopende partij"/>
+								<Label text="Verkopende partij"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolVerkopendePartij}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Verzekeraar"/>
+								<Label text="Verzekeraar"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolVerzekeraar}" editable="{helper>/ui/editable}"/>
 
 								<Toolbar ariaLabelledBy="Title5">
 									<Title text="Voor Inkoop/Verkoop administratie" level="H5" titleStyle="H5"/>
 								</Toolbar>
-								<Label text="Rol leverancier"/>
+								<Label text="Leverancier"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolLeverancier}" editable="{helper>/ui/editable}"/>
 								<Toolbar>
 									<Title text="Voor Financiële administratie" level="H5" titleStyle="H5"/>
 								</Toolbar>
-								<Label text="Rol Debiteur"/>
+								<Label text="Debiteur"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolDebiteur}" editable="{helper>/ui/editable}"/>
-								<Label text="Rol Crediteur"/>
+								<Label text="Crediteur"/>
 								<CheckBox selected="{helper>/store/zakenpartner/details/RolCrediteur}" editable="{helper>/ui/editable}"/>
 								<Toolbar>
 									<Title text="Voor Subsidie administratie" level="H5" titleStyle="H5"/>
 								</Toolbar>
-								<Label text="Rol Subsidies"/>
-								<CheckBox selected="{helper>/store/zakenpartner/details/Gm}" editable="{helper>/ui/editable}" select="onSelectShowCorsaNummer"/>
+								<Label text="Subsidies"/>
+								<CheckBox selected="{helper>/store/zakenpartner/details/RolSubsidieaanvrager}" editable="{helper>/ui/editable}" select="onSelectShowCorsaNummer"/>
 								<Label text="Corsa nummer" visible="{helper>/ui/showcorsanummer}"/>
 								<Input value="{helper>/store/zakenpartner/details/CorsaNr}" visible="{helper>/ui/showcorsanummer}"/>
 							</f:content>
@@ -188,7 +199,7 @@
 		<!-- Custom Footer Content-->
 		<semantic:footerCustomActions>
 			<Button text="Wijzigen" press="onPressEdit" visible="{= !${helper>/ui/editable}}"/>
-			<Button text="Bewaren" press="onPressSave" visible="{helper>/ui/editable}"/>
+			<Button text="Indienen" press="onPressSave" visible="{helper>/ui/editable}"/>
 			<Button text="Annuleren" press="onPressCancel" visible="{helper>/ui/editable}"/>
 		</semantic:footerCustomActions>
 	</semantic:SemanticPage>

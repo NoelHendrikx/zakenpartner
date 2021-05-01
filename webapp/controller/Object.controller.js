@@ -7,11 +7,12 @@ sap.ui.define(
 
     "nl/peppieportals/zakenpartner/model/formatter",
     "nl/peppieportals/zakenpartner/model/models",
+    "nl/peppieportals/library/utils/toolbox",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/MessageToast"
   ],
-  function (BaseController, JSONModel, History, formatter, models, Filter, FilterOperator, MessageToast) {
+  function (BaseController, JSONModel, History, formatter, models, toolbox, Filter, FilterOperator, MessageToast) {
     "use strict";
 
     return BaseController.extend("nl.peppieportals.zakenpartner.controller.Object", {
@@ -93,12 +94,17 @@ sap.ui.define(
           models.getZakenpartnerData(sPartner).then(function (oPartner) {
             oModel.setProperty("/ui/editable", false);
             oModel.setProperty("/store/zakenpartner/details", oPartner);
+            oModel.setProperty("/ui/showcorsanummer", oPartner.RolSubsidieaanvrager);
           });
         } else {
           // zet zakenpartner type
           oModel.setProperty("/store/zakenpartner/details", models.getInitialStructure());
           oModel.setProperty("/store/zakenpartner/details/SoortZakenpartner", sPartner);
           oModel.setProperty("/ui/organisatie", sPartner === "2");
+          oModel.setProperty(
+            "/ui/showcorsanummer",
+            oModel.getProperty("/store/zakenpartner/details/RolSubsidieaanvrager")
+          );
           oModel.setProperty("/ui/persoon", sPartner === "1");
           oModel.setProperty("/ui/editable", true);
         }
@@ -123,12 +129,26 @@ sap.ui.define(
         var oModel = this.getModel("helper");
         var that = this;
         var oPayload = oModel.getProperty("/store/zakenpartner/details");
-        models.createZakenpartnerData(oPayload).then(function (oPartner) {
-          MessageToast.show("Zakenpartner is aangevraagd en moet worden verwerkt.", {
-            duration: 3000,
-            closeOnBrowserNavigation: false,
+
+        //var validator = new Validator();
+        //validator.validate(this.byId("pageObject"));
+
+        var oBundleObject = {
+          title: "Zakenpartner indienen",
+          labeltext: "Heeft u de drie tabbladen ingevuld?",
+          confirmCheckboxText: "Ja, dat heb ik.",
+        };
+
+        //  if (validator.isValid() && bValid) {
+
+        toolbox.confirmationRequiredBeforePost(oBundleObject).then(function (oResponse) {
+          models.createZakenpartnerData(oPayload).then(function (oPartner) {
+            MessageToast.show("Zakenpartner is aangevraagd en moet worden verwerkt.", {
+              duration: 3000,
+              closeOnBrowserNavigation: false,
+            });
+            that.getRouter().navTo("worklist");
           });
-          that.getRouter().navTo("worklist");
         });
       },
 
@@ -209,6 +229,11 @@ sap.ui.define(
           oViewModel = this.getModel("objectView"),
           oElementBinding = oView.getElementBinding();
       },
+
+      onMessagesButtonPress: function (oEvent) {
+        var oMessagesButton = oEvent.getSource();
+        toolbox.displayPopoverMessage(this, oMessagesButton);
+      }
     });
   }
 );

@@ -8,8 +8,9 @@ sap.ui.define(
     "sap/ui/core/routing/History",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
+    "nl/peppieportals/library/utils/toolbox",
   ],
-  function (BaseController, formatter, models, JSONModel, History, Filter, FilterOperator) {
+  function (BaseController, formatter, models, JSONModel, History, Filter, FilterOperator, toolbox) {
     "use strict";
 
     return BaseController.extend("nl.peppieportals.zakenpartner.controller.Worklist", {
@@ -64,19 +65,17 @@ sap.ui.define(
        * @param {sap.ui.base.Event} oEvent the update finished event
        * @public
        */
-      onUpdateFinished: function (oEvent) {
-
-      },
+      onUpdateFinished: function (oEvent) {},
 
       onPressCreateZakenpartnerBedrijf: function () {
         this.getRouter().navTo("aanmaken", {
-          objectId: "2"
+          objectId: "2",
         });
       },
 
       onPressCreateZakenpartnerPersoon: function () {
         this.getRouter().navTo("aanmaken", {
-          objectId: "1"
+          objectId: "1",
         });
       },
 
@@ -167,6 +166,11 @@ sap.ui.define(
         if (aTableSearchState.length !== 0) {
           oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
         }
+      },
+
+      onMessagesButtonPress: function (oEvent) {
+        var oMessagesButton = oEvent.getSource();
+        toolbox.displayPopoverMessage(this, oMessagesButton);
       },
     });
   }

@@ -19,7 +19,7 @@
 					<Column><Text text="{i18n>naam}"/></Column>
 					<Column><Text text="{i18n>soortzakenpartner}"/></Column>
 					<Column><Text text="{i18n>partnernr}"/></Column>
-					<Column><Text text="{i18n>kvknummer}"/></Column>
+					<Column><Text text="{i18n>kvkbsnnummer}"/></Column>
 					<Column><Text text="{i18n>postcode}"/></Column>
 					<Column><Text text="{i18n>plaats}"/></Column>					
 					
@@ -30,7 +30,7 @@
 							<ObjectAttribute text="{Voornaam} {Achternaam} {Naam1}"/>
 							<ObjectAttribute text="{path : 'SoortZakenpartner', formatter: '.formatter.formatZakenPartner'}"/>
 							<ObjectAttribute text="{Partner}"/>
-							<ObjectAttribute text="{KvkNummer}"/>
+							<ObjectAttribute text="{KvkNummer}{Bsn}"/>
 							<ObjectAttribute text="{Postcode}"/>
 							<ObjectAttribute text="{Plaats}"/>														
 						
